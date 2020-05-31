@@ -105,3 +105,13 @@ export class SimpleComponent extends BaseComponent implements OnInit {
   }
 }
 ```
+
+## Event Bus vs Observable Service
+
+| Event Bus                                                      | Observable Service                                        |
+| -------------------------------------------------------------- | --------------------------------------------------------- |
+| Mediator pattern                                               | Observer pattern                                          |
+| Angular service acts as the middleman between components       | Angular service exposes observable directly to components |
+| Components don't know where the data is coming from by default | Components know where data is coming from                 |
+| Loosely coupled                                                | Not as loosely coupled as event bus                       |
+| Relies on subject/observable                                   | Relies on subject/observable                              |
