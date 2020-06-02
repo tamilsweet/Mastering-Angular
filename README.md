@@ -6,6 +6,16 @@ Angular related notes
 
 `app` folder has the Angular application code
 
+## Tips to build respectable, high quality and scalable Angular Applications
+
+- Create architecture template and style guide to help team develop faster
+- Use @Optional, @SkipSelf decorators to prevent CoreModule from being imported more than once
+- LIFT
+  - Locate code quickly
+  - Identify the code at a glance
+  - Flattest structure possible
+  - Try to be DRY
+
 ## Structuring Components
 
 Container and presentation components
@@ -115,3 +125,31 @@ export class SimpleComponent extends BaseComponent implements OnInit {
 | Components don't know where the data is coming from by default | Components know where data is coming from                 |
 | Loosely coupled                                                | Not as loosely coupled as event bus                       |
 | Relies on subject/observable                                   | Relies on subject/observable                              |
+
+## Security Considerations
+
+### CORS Considerations
+
+- CORS allows a browser to call a different domain or port
+- Enable on the server as needed
+- Limit allowed domain, headers, and methods
+
+### CSRF Considerations
+
+- Enable CSRF on the server if using cookie authentication
+- Angular will read a token from a cookie set by the server and add it to the request headers
+- Change the cookie/header name as appropriate for your server
+- Server will validate the header value
+
+### Route Guards
+
+- Define route guards needed by application based on user or group/role
+- route guards dont "secure" an application
+- Rely on the server to secure data, APIs, etc.
+
+### Sensitive Data
+
+- Anyone can access variables, local/session storage, cookie, etc.
+- Do not store sensitive data in the browser
+- If an API requries a "secret" to be passed, consider calling it through a "middle-man" service that you own
+- Use JWT tokens where possible for server authentication (set appropriate TTL expiration for tokens)
