@@ -16,6 +16,12 @@ Angular related notes
   - Flattest structure possible
   - Try to be DRY
 
+### Performance Tips
+
+- Use the Angular CLI
+- Compile before deploying - using AOT (`npm start -- --prod`, `npm run build -- --prod`)
+- Use `source-map-explorer` to check bundle size (`npm run build -- --prod --sourcemaps=true`)
+
 ## Structuring Components
 
 Container and presentation components
