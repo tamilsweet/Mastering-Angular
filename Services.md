@@ -31,3 +31,18 @@ providers: [
 providers: [ LoggerService ]
 // Since both are same
 ```
+
+### Role of Injectors
+
+- Deliver provided services when they're required via constructor injection
+- Maintain a single instance of each service provided
+- Determine what to inject based on emitted metadata
+- Delegate injection to the parent injector if necessary
+
+### The importance of Metadata
+
+Provides information about parameters to injectors
+Enabled with the "emitDecoratorMetadata" compiler option set to true
+
+- Any decorator is sufficient for emitting metadata
+- Hence we use only @Component decorator and @Injectable is not required for components
