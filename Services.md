@@ -46,3 +46,26 @@ Enabled with the "emitDecoratorMetadata" compiler option set to true
 
 - Any decorator is sufficient for emitting metadata
 - Hence we use only @Component decorator and @Injectable is not required for components
+
+## Built-In Services
+
+### Title
+
+```
+class Title {
+  getTitle(): string
+  setTitle(newTitle: string)
+}
+```
+
+### Version
+
+```
+class Version {
+  constructor(full: string)
+  major: string
+  minor: string
+  patch: string
+  full: string
+}
+```
