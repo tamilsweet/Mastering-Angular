@@ -19,3 +19,25 @@
 - Integration
   - Shallow
   - Deep
+
+### AAA Pattern
+
+- _Arrange_ all necessary preconditions and inputs
+- _Act_ on the object or class under test
+- _Assert_ that the expected results have occured
+
+### DAMP vs DRY
+
+- DRY (don't repeat yourself) - Remove duplication
+- DAMP - Repeat yourself if necessary
+
+## Tell the Story
+
+- A test should be complete story, all within the it()
+- You shouldn't need to look around much to understand the test
+
+### Techniques
+
+- Move less interesting setup into beforeEach()
+- Keep the critical setup within the it()
+- Include Arrange, Act, and Arrange inside the it()
