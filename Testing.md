@@ -46,3 +46,24 @@
 
 - _Karma_ - Test Runner for JavaScript
 - _Jasmine_ - Behavior-driven development framework for testing JavaScript code
+
+### Mocking Service
+
+```
+describe('HeroesComponent', () => {
+  ...
+  let mockHeroService;
+
+  beforeEach(() => {
+    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addHero', 'deleteHero']);
+    component = new HeroesComponent(mockHeroService);
+  });
+
+  describe('delete', () {
+    it('should remove the selected hero from the heroes list', () => {
+      mockHeroService.deleteHero.and.returnValue(of(true));
+      ...
+    });
+  });
+}
+```
