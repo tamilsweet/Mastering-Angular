@@ -41,3 +41,8 @@
 - Move less interesting setup into beforeEach()
 - Keep the critical setup within the it()
 - Include Arrange, Act, and Arrange inside the it()
+
+## Karma & Jasmine
+
+- _Karma_ - Test Runner for JavaScript
+- _Jasmine_ - Behavior-driven development framework for testing JavaScript code
