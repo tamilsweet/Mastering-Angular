@@ -67,3 +67,26 @@ describe('HeroesComponent', () => {
   });
 }
 ```
+
+## NO_ERRORS_SCHEMA
+
+- Ignore unknown attributes and elements
+- Can hide other issues, use with caution
+
+```
+TestBed.configureTestingModule({
+  schemas: [NO_ERRORS_SCHEMA]
+})
+```
+
+## NativeElement vs DebugElement
+
+- NativeElement - actual DOM object - exposes DOM API
+  `fixture.nativeElement.querySelector('a').textContent`
+
+- DebugElement - wrapper around NativeElement - different set of functionality
+  `fixture.debugElement.query(By.css('a')).nativeElement.textContent`
+
+## TIPS
+
+- Use .toContain('text') to avoid fragile unit tests
