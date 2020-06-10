@@ -87,6 +87,8 @@ TestBed.configureTestingModule({
 - DebugElement - wrapper around NativeElement - different set of functionality
   `fixture.debugElement.query(By.css('a')).nativeElement.textContent`
 
+- Component is subclass of directive, specialized kind of directive !!??
+
 ## TIPS
 
 - Use .toContain('text') to avoid fragile unit tests
