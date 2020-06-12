@@ -69,3 +69,39 @@ class Version {
   full: string
 }
 ```
+
+## Unsubscribe using takeUntil
+
+```
+@Component({
+  ...
+})
+export class MyComponent implements OnDestroy {
+  private destroy$: Subject<void> = new Subject<void>();
+
+  constructor(private myService: MyService) {
+    myService.some$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}
+```
+
+## Lint for subscription
+
+```
+npm install @angular-extensions/lint-rules --save-dev
+
+// tslint.json
+{
+  "extends": [
+    "tslint:recommended",
+    "@angular-extensions/lint-rules"
+  ]
+}
+```
