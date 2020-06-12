@@ -89,6 +89,28 @@ TestBed.configureTestingModule({
 
 - Component is subclass of directive, specialized kind of directive !!??
 
+### Mocking RouterLink
+
+```
+
+@Directive({
+  selector: '[routerLink]',
+  host: { '(click)': 'onClick()' }
+})
+export class RouterLinkDirectiveStub {
+  @Input('routerLink') linkParams: any;
+  navigatedTo: any = null;
+
+  onClick() {
+    this.navigatedTo = this.linkParams;
+  }
+}
+
+```
+
 ## TIPS
 
 - Use .toContain('text') to avoid fragile unit tests
+- Principles of Testing
+  - Don't test the framework
+  - Test your code
