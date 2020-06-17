@@ -1,5 +1,11 @@
 # Angular Basics
 
+## Serve in prod mode
+
+```
+npm start -- --prod
+```
+
 ## Template Syntax
 
 ### Interpolation
@@ -97,3 +103,7 @@ getStartTimeClass() {
 <div [ngStyle]="{ 'color': event?.time === '8:00 am' ? 'green' : 'black', 'font-weight': event?.time === '8:00 am' ? 'bold' : 'normal' }">
 
 ```
+
+## Models for Type Safety
+
+- Use class or interface
