@@ -31,6 +31,7 @@
 
 - Create form in OnInit
 - Need FormsModule, ReactiveFormsModule
+- Map with interface for type-safety before submit/save
 
 ```
 this.firstname = new FormControl(this.authService.currentUser.firstname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
@@ -50,10 +51,42 @@ validateLastname() {
   <input formControlName="firstname" id="firstname" class="form-control" type="text" placeholder="firstname" />
 ...
 <div [ngClass]="{'error': !validateLastname() }">
-  <em *ngIf="!validLastname() && profileForm.controls.lastname.errors.required">Required</em>
-  <em *ngIf="!validLastname() && profileForm.controls.lastname.errors.pattern">Must start with a letter</em>
+  <em *ngIf="!validLastname() && lastname.errors.required">Required</em>
+  <em *ngIf="!validLastname() && lastname.errors.pattern">Must start with a letter</em>
   <input formControlName="lastname" id="lastname" class="form-control" type="text" placeholder="lastname" />
 ...
 </form>
 
+```
+
+## Custom Validators
+
+```
+[this.restrictedWords]
+
+private restrictedWords(control: FormControl): {[key: string]: any} {
+  return control.value.includes('foo')
+    ? { 'restrictedWords': 'foo' }
+    : null
+}
+
+function restrictedWords(words: string[]) {
+  return (control: FormControl): {[key: string]: any} => {
+    if(!words) {
+      return null;
+    }
+
+    var invalidWords = words.map(w => control.value.includes(w) ? w : null).filter(w => w !== null);
+
+    return invalidWords && invalidWords.length > 0
+      ? { 'restrictedWords': invalidWords.join(', ') }
+      : null
+  }
+}
+
+private restrictedWords(control: FormControl): {[key: string]: any} {
+  return control.value.includes('foo')
+    ? { 'restrictedWords': 'foo' }
+    : null
+}
 ```
