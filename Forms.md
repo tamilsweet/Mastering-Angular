@@ -3,20 +3,34 @@
 ## Template based forms
 
 - [(ngModel)] - use 2-way binding using [()], refered to as "Banana in a box" syntax
+- Use () for create form
+- Use [()] for edit form
+- Use safe navigation operator for checking control data
+- Use placeholder css rules to style error / required fields
+- Need FormsModule
+- Use `ngModelGroup` to nested object fields
+- `name` field is used to populate form value
 
 ```
 <form #loginform="ngForm" (ngSubmit)="login(loginform.value)">
 <em *ngIf="loginform.controls.username?.invalid && loginform.controls.username?.touched || mouseoverLogin">Required</em>
-<input [(ngModel)]="username" id="username" type="text" placeholder="Username" />
+<input (ngModel)="username" name="username" id="username" type="text" required pattern="[a-zA-Z].*" placeholder="Username" />
+
+<input (ngModel)="imageUrl" name="imageUrl" id="imageUrl" type="text" required pattern=".*\/.*.(png|jpg)" placeholder="Url of image..." />
 
 <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
 <button type="submit" [disabled]="loginform.invalid">Login</button>
+
+<div ngModelGroup="location">
+  <input (ngModel)="address" name="address" />
+  <input (ngModel)="country" name="country" >
+</div>
 ```
 
 ## Reactive forms
 
 - Create form in OnInit
-- Need ReactiveFormsModule
+- Need FormsModule, ReactiveFormsModule
 
 ```
 this.firstname = new FormControl(this.authService.currentUser.firstname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
