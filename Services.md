@@ -105,3 +105,40 @@ npm install @angular-extensions/lint-rules --save-dev
   ]
 }
 ```
+
+## Third-Party Service
+
+```
+toastr.service.ts
+
+import { InjectionToken } from '@angular/core';
+
+export let TOASTR_TOKEN = new InjectionToken<Toastr>('toastr');
+
+export interface Toastr {
+    success: (msg: string, title?: string): void;
+    info: (msg: string, title?: string): void;
+    warning: (msg: string, title?: string): void;
+    error: (msg: string, title?: string): void;
+}
+
+
+my.module.ts
+
+import { TOASTR_TOKEN, Toastr } from 'toastr.service.ts';
+
+declare let toastr: Toastr = window['toastr'];
+
+
+{ provide: TOASTR_TOKEN, useValue: toastr }
+
+
+my.component.ts
+
+import { Inject } from '@angular/core';
+import { TOASTR_TOKEN, Toastr } from 'toastr.service.ts';
+
+constructor(
+  @Inject(TOASTR_TOKEN) private toastr: Toastr
+)
+```
