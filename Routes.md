@@ -42,6 +42,21 @@ export class EventListResolver implements Resolve<any> {
 ngOnInit() {
   this.events = this.route.snapshot.data['events];
 }
+
+
+// Doesnt work if trying to navigate in same Component
+ngOnInit() {
+  this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+}
+
+// Allows navigating within same component
+ngOnInit() {
+  this.route.params.forEach((params: Params) => {
+    this.event = this.eventService.getEvent(+params['id']);
+    // Also reset remaining state to default
+  });
+}
+
 ```
 
 ## Styling Active Link

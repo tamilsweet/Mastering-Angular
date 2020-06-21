@@ -127,7 +127,7 @@ my.module.ts
 
 import { TOASTR_TOKEN, Toastr } from 'toastr.service.ts';
 
-declare let toastr: Toastr = window['toastr'];
+let toastr: Toastr = window['toastr'];
 
 
 { provide: TOASTR_TOKEN, useValue: toastr }
@@ -141,4 +141,22 @@ import { TOASTR_TOKEN, Toastr } from 'toastr.service.ts';
 constructor(
   @Inject(TOASTR_TOKEN) private toastr: Toastr
 )
+```
+
+# Adding jQuery
+
+```
+jQuery.service.ts
+
+import { InjectionToken } from '@angular/core';
+
+export let JQUERY_TOKEN = new InjectionToken<Object>('jQuery');
+
+
+import { JQUERY_TOKEN } from 'jQuery.service.ts';
+
+let jQuery = window['$'];
+
+{ provide: JQUERY_TOKEN, useValue: jQuery }
+
 ```

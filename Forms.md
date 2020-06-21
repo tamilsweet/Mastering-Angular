@@ -10,6 +10,7 @@
 - Need FormsModule
 - Use `ngModelGroup` to nested object fields
 - `name` field is used to populate form value
+- `ngSubmit` - triggered on both click on submit button as well as enter button.
 
 ```
 <form #loginform="ngForm" (ngSubmit)="login(loginform.value)">
