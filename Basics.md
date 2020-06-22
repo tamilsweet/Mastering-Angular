@@ -107,3 +107,12 @@ getStartTimeClass() {
 ## Models for Type Safety
 
 - Use class or interface
+
+## @Input() Setters
+
+```
+@Input() set voted(val) {
+  this.iconColor = val ? 'red' : 'white';
+}
+this.iconColor: string;
+```
