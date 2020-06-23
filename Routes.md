@@ -25,7 +25,7 @@ this.router.navigate(['/events']);
 - CanActivate
 - CanDeactivate
 
-## Resolver
+## Resolver Pattern
 
 - Resolver will subscribe automatically
 
@@ -56,6 +56,13 @@ ngOnInit() {
   this.route.params.forEach((params: Params) => {
     this.event = this.eventService.getEvent(+params['id']);
     // Also reset remaining state to default
+  });
+}
+
+// Using resolver for component with same component routing
+ngOnInit() {
+  this.route.data.forEach((data) => {
+    this.event = data['event'];
   });
 }
 
