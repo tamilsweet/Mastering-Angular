@@ -35,3 +35,8 @@ initSubjects() {
 }
 
 ```
+
+## Promises vs Observables
+
+- `Promise` represents a single value in the future - asynchronous
+- `Observables` represent 0 or more values now or in the future - synchornous or asynchronous
