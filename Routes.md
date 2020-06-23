@@ -27,6 +27,8 @@ this.router.navigate(['/events']);
 
 ## Resolver
 
+- Resolver will subscribe automatically
+
 ```
 
 @Injectable()

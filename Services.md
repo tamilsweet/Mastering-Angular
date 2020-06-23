@@ -170,3 +170,20 @@ getEvents():Observable<IEvent[]> {
   return subject;
 }
 ```
+
+## Error Handling - Pattern
+
+```
+.pipe(
+  catchError(
+    this.handleError<IEvent[]>('getEvents', [])
+  )
+);
+
+private handleError<T> (operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+    console.log(error);
+    return of(result as T);
+  }
+}
+```
