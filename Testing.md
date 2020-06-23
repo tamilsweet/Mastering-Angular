@@ -20,6 +20,24 @@
   - Shallow
   - Deep
 
+### Isolated Tests
+
+- Test Class Only - No Template
+- Constructed in Test
+- Simple
+- Best for Services & Pipes
+- Appropriate for Components & Directives to just test code
+
+### Integrated Tests
+
+- Test Class & Template
+- Constructed by Framework
+- Complex
+- Mainly used for Components & Directives
+- Sometimes used for services
+- Deep - multiple components (parent/child)
+- Shallow - only test single component
+
 ### AAA Pattern
 
 - _Arrange_ all necessary preconditions and inputs
