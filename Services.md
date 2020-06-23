@@ -160,3 +160,13 @@ let jQuery = window['$'];
 { provide: JQUERY_TOKEN, useValue: jQuery }
 
 ```
+
+## Dummy Service from Constant - Pattern
+
+```
+getEvents():Observable<IEvent[]> {
+  let subject = new Subject<IEvent[]>();
+  setTimeout(() { subject.next(EVENTS); subject.complete(); }, 100);
+  return subject;
+}
+```
