@@ -132,3 +132,9 @@ export class RouterLinkDirectiveStub {
 - Principles of Testing
   - Don't test the framework
   - Test your code
+
+### jasmine.any - Usage
+
+```
+  expect(mockHttp.post).toHaveBeenCalledWith('myurl', {}, jasmine.any(Object));
+```
