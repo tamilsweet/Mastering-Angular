@@ -1,5 +1,15 @@
 # Tips & Gotchas
 
+## Tips
+
+- Use CLI
+- Follow Angular style guide
+- Do sorting & filtering in your component !?
+- Learn & use Typescript features
+- Use Lazyloading
+- Don't touch the DOM directly
+- Use immutable or observable data to maximize performance
+
 ## Pure & Impure pipes
 
 - Pure: only evaluated when input changes
