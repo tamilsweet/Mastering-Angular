@@ -10,6 +10,8 @@ npm start -- --prod
 
 ### Interpolation
 
+- Expression inside {{ }} is known as Template Expression
+
 ```
 <h2>{{user.name}}</h2>
 ```

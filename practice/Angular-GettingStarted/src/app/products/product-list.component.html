@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2 text-left">Filter by:</div>
+      <div class="col-md-4"><input type="text"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text-left">Filtered by: </h4>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table" *ngIf="products?.length">
+        <thead>
+          <tr>
+            <th>
+              <button class="btn btn-primary">Show Image</button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th class="text-right">Price</th>
+            <th class="text-center">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td></td>
+            <td>{{ product.productName }}</td>
+            <td>{{ product.productCode }}</td>
+            <td>{{ product.releaseDate }}</td>
+            <td class="text-right">{{ product.price | currency }}</td>
+            <td class="text-center">{{ product.starRating }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
