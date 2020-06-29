@@ -22,6 +22,9 @@ npm start -- --prod
 <img [src]="user.imageUrl" />
 ```
 
+- [] => Binding Target
+- "" => Binding Source
+
 _Expression Restrictions in Interpolation_
 
 - Cannot use assignment operators (=, +=, ++, etc)
@@ -41,6 +44,19 @@ _Expression Recommendations in Interpolation_
 ```
 <button (click)="doSomething()"></button>
 ```
+
+- () => Target Event
+- "" => Template Statement
+
+Ref: for events - https://developer.mozilla.org/en-US/docs/Web/Events
+
+### Two-way Binding
+
+```
+[(ngModel)]="property"
+```
+
+- [()] => Banana in a Box
 
 _Expression Restrictions in Interpolation_
 
@@ -109,6 +125,19 @@ getStartTimeClass() {
 ## Models for Type Safety
 
 - Use class or interface
+
+### Interface
+
+- development time only!
+- strong typing and better tooling support
+- make it easy to maintain and debug code
+
+```
+export interface IProduct {
+  productName: string;
+  ...
+}
+```
 
 ## @Input() Setters
 

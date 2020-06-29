@@ -2,6 +2,14 @@
 
 - A component is internally a directive
 
+## Improve Components
+
+- Strong typing & interfaces
+- Encapsulating Styles
+- Lifecycle hooks
+- Custom Pipes
+- Nested Components
+
 ## The Trigger Directive
 
 ```
