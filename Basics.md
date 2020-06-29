@@ -147,3 +147,43 @@ export interface IProduct {
 }
 this.iconColor: string;
 ```
+
+### Getters
+
+- Defines a read-only property
+
+```
+get fullName(): string {
+  return this.lastName + ', ' this.firstName;
+}
+
+console.log(this.fullName);
+```
+
+### Setters
+
+- Defines a write-only property
+
+```
+set quantity(value: number) {
+  this.recalculate(value);
+}
+
+```
+
+### Getter & Setter
+
+- To define getter & setter with same name needs backing field
+
+```
+private _listFilter: string;
+
+get listFilter(): string {
+  return this._listFilter;
+}
+
+set listFilter(value: string) {
+  this._listFilter = value;
+}
+
+```
