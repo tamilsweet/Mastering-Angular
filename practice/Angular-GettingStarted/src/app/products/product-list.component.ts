@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
 })
 export class ProductListComponent {
   pageTitle = 'Product List';
+  showImages = false;
+  imageWidth = 50;
+  imageMargin = 2;
+  listFilter = '';
   products = [{
     'productId': 1,
     'productName': 'Leaf Rake',
@@ -36,4 +40,8 @@ export class ProductListComponent {
     'starRating': 4.8,
     'imageUrl': 'assets/images/hammer.png'
   }];
+
+  toggleImages(): void {
+    this.showImages = !this.showImages;
+  }
 }
