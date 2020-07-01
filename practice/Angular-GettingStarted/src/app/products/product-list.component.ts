@@ -12,6 +12,7 @@ export class ProductListComponent {
   showImages = false;
   imageWidth = 50;
   imageMargin = 2;
+  rating = '';
   set quantity(value: number) {
     this.recalculate(value);
   }
@@ -74,5 +75,9 @@ export class ProductListComponent {
 
   recalculate(value: number) {
     return value;
+  }
+
+  onRatingClicked(message: string) {
+    this.pageTitle = 'Product List: ' + message;
   }
 }
