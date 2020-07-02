@@ -10,6 +10,9 @@
 
 ### Dependency Injection
 
+- A coding pattern in which a class receives the instances of objects
+  it needs (called dependencies) from an external source rather than
+  create them itself
 - A provider tells an injector how to create the service.
 - Provider Tokens
 
