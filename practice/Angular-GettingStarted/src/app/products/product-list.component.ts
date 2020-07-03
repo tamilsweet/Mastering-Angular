@@ -30,6 +30,7 @@ export class ProductListComponent implements OnInit {
 
   filteredProducts: IProduct[];
   products: IProduct[] = [];
+  errorMessage: string;
 
   constructor(private productService: ProductService) { }
 
@@ -37,6 +38,8 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe(products => {
       this.products = products;
       this.filteredProducts = products;
+    }, err => {
+        this.errorMessage = err;
     });
   }
 

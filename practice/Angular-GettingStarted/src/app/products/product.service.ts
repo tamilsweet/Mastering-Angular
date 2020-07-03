@@ -1,41 +1,36 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from './product.model';
-import { of, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { of, Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+  private productUrl = 'api/products/products.json';
+
+  constructor(
+    private httpClient: HttpClient
+  ) { }
+
   getProducts(): Observable<IProduct[]> {
-    return of([{
-      'productId': 1,
-      'productName': 'Leaf Rake',
-      'productCode': 'GDN-0011',
-      'releaseDate': new Date('March 19, 2019'),
-      'description': 'Leaf rake with 48-inch wooden handle.',
-      'price': 19.95,
-      'starRating': 3.2,
-      'imageUrl': 'assets/images/leaf_rake.png'
-    },
-    {
-      'productId': 2,
-      'productName': 'Garden Cart',
-      'productCode': 'GDN-0023',
-      'releaseDate': new Date('March 18, 2019'),
-      'description': '15 gallon capacity rolling garden cart',
-      'price': 32.99,
-      'starRating': 4.2,
-      'imageUrl': 'assets/images/garden_cart.png'
-    },
-    {
-      'productId': 5,
-      'productName': 'Hammer',
-      'productCode': 'TBX-0048',
-      'releaseDate': new Date('May 21, 2019'),
-      'description': 'Curved claw steel hammer',
-      'price': 8.9,
-      'starRating': 4.8,
-      'imageUrl': 'assets/images/hammer.png'
-    }]);
+    return this.httpClient.get<IProduct[]>(this.productUrl).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occured. Handle it accordingly.
+      errorMessage = `An error occured: ${err.error.message}`;
+    } else {
+      errorMessage = `Server returned code: ${err.status}, error message is ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

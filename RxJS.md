@@ -39,4 +39,43 @@ initSubjects() {
 ## Promises vs Observables
 
 - `Promise` represents a single value in the future - asynchronous
+  - Not Lazy
+  - Not Cancellable
 - `Observables` represent 0 or more values now or in the future - synchornous or asynchronous
+  - Lazy
+  - Cancellable
+  - Supports map, filter, reduce and similar operators
+
+## Composing Operators
+
+- Compose operators with the pipe method
+- Often called "pipeable operators"
+
+```
+const source$: Observable<number> = range(0, 10); # 0 to 9
+
+source$.pipe(
+  map(x => x * 3),
+  filter(x => x % 2 === 0)
+).subscribe(x => console.log(x));
+```
+
+## Subscribing to an Observable
+
+```
+x.subscribe()
+
+x.subscribe(Observer)
+
+x.subscribe({
+  nextFn,
+  errorFn,
+  completeFn
+})
+
+let sub = x.subscribe({
+  nextFn,
+  errorFn,
+  completeFn
+})
+```
