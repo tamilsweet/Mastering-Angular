@@ -1,5 +1,13 @@
 # Routes
 
+## How Routing Works
+
+- Configure a route for each component
+- Define options/actions
+- Tie a route to each option/action
+- Activate the route based on user action
+- Activating a route displays the component's view
+
 ## Get route parameter
 
 ```
