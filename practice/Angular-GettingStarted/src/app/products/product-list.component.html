@@ -31,7 +31,11 @@
           <tr *ngFor="let product of filteredProducts">
             <td><img *ngIf="showImages" [style.width.px]="imageWidth" [style.margin.px]="imageMargin"
                 [src]="product.imageUrl" [title]="product.productName" /></td>
-            <td>{{ product.productName }}</td>
+            <td>
+              <a [routerLink]="['/products', product.productId]">
+                {{ product.productName }}
+              </a>
+            </td>
             <td>{{ product.productCode | lowercase | convertToSpaces:'-' }}</td>
             <td>{{ product.releaseDate | date:"MM/dd/yy" }}</td>
             <td class="text-right">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>

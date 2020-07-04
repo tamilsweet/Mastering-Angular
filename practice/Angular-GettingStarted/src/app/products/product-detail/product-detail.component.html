@@ -2,5 +2,34 @@
   <div class="card-header">
     {{ pageTitle + ': ' + product.productName }}
   </div>
-  
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <dl class="row">
+          <dt class="col-md-4">Name:</dt>
+          <dd class="col-md-8">{{ product.productName }}</dd>
+          <dt class="col-md-4">Product Code:</dt>
+          <dd class="col-md-8">{{ product.productCode }}</dd>
+          <dt class="col-md-4">Release Date:</dt>
+          <dd class="col-md-8">{{ product.releaseDate }}</dd>
+          <dt class="col-md-4">Description:</dt>
+          <dd class="col-md-8">{{ product.description }}</dd>
+          <dt class="col-md-4">Price:</dt>
+          <dd class="col-md-8">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</dd>
+          <dt class="col-md-4">Star Rating:</dt>
+          <dd class="col-md-8">
+            <pm-star [rating]="product.starRating"></pm-star>
+          </dd>
+        </dl>
+      </div>
+      <div class="col-md-4">
+        <img class="img-thumbnail rounded" alt="{{ product.productName }}" src="{{ product.imageUrl }}" />
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-outline-secondary" (click)="onBack()" [autofocus]="autofocus">
+      <i class="fa fa-chevron-left"></i> Back
+    </button>
+  </div>
 </div>

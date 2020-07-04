@@ -8,10 +8,23 @@
 - Activate the route based on user action
 - Activating a route displays the component's view
 
-## Get route parameter
+## Passing paramter to route
+
+- `:<placeholder>` - colon and placeholder
 
 ```
-let itemID: number = parseInt(this.route.snapshot.params['id']);
+  { path: 'products/:id', component: ProductDetailComponent },
+
+<a [routerLink]="['/products', product.productId]">{{product.productName}}</a>
+```
+
+## Reading route parameter
+
+```
+constructor(private route: ActivatedRoute) {
+  let productId = +this.route.snapshot.params['id'];
+  let productId = +this.route.snapshot.paramMap.get('id');
+}
 ```
 
 ## Router Link
@@ -28,10 +41,18 @@ let itemID: number = parseInt(this.route.snapshot.params['id']);
 this.router.navigate(['/events']);
 ```
 
-## Route Guards
+## Protecting Routes with Guards
+
+CLI: `ng g g product-detail`
 
 - CanActivate
+  - Guard navigation to a route
 - CanDeactivate
+  - Guard navigation away from a route
+- Resolve
+  - Pre-fetch data before activating a route
+- CanLoad
+  - Prevent asynchronous routing
 
 ## Resolver Pattern
 
