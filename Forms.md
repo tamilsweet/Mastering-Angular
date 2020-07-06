@@ -1,5 +1,19 @@
 # Angular Forms
 
+## Template-driven Forms vs Reactive Forms
+
+- Template-driven Forms
+
+  - Use a Component's Template
+  - Unit Test Against DOM
+
+- Reactive Forms
+
+  - Use a Component's Template
+  - Create a Form Model in Typescript
+  - Unit Test Against Form Model
+  - Validation in Form Model
+
 ## Template based forms
 
 - [(ngModel)] - use 2-way binding using [()], refered to as "Banana in a box" syntax
