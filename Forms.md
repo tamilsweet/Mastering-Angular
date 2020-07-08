@@ -19,6 +19,7 @@
 - [(ngModel)] - use 2-way binding using [()], refered to as "Banana in a box" syntax
 - Use () for create form
 - Use [()] for edit form
+- Use `#loginform="ngForm"` to access form data
 - Use safe navigation operator for checking control data
 - Use placeholder css rules to style error / required fields
 - Need FormsModule
@@ -41,6 +42,29 @@
   <input (ngModel)="country" name="country" >
 </div>
 ```
+
+### Form Validation
+
+- `ngNativeValidate` - Enable default browser validation
+- HTML5 Validations
+  - required
+  - pattern
+  - minlength
+  - maxlength
+  - min
+  - max
+
+#### _Validation Classes_
+
+- ng-untouched | ng-touched
+- ng-pristine | ng-dirty
+- ng-valid | ng-invalid
+
+#### _Classes and Associated NgModel Properties_
+
+- untouched | touched
+- pristine | dirty
+- valid | invalid
 
 ## Reactive forms
 
