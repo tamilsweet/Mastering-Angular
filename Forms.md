@@ -66,6 +66,22 @@
 - pristine | dirty
 - valid | invalid
 
+- Style using classes
+  eg.
+
+```
+  .ng-invalid:not(form).ng-touched {
+    border: 1px solid #red;
+  }
+  <input name="name" class="form-control" [(ngModel)]="formObj.name" required #nameField="ngModel">
+  <div [hidden]="nameField.valid || nameField.untouched" class="alert alert-danger">
+    Enter a name
+  </div>
+
+```
+
+- Use `form.submitted` to validate on submit
+
 ## Reactive forms
 
 - Create form in OnInit
