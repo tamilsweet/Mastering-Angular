@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ProductsModule } from './products/products.module';
 import { UserSettingsFormComponent } from './user-settings-form/user-settings-form.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ProductsModule,
     AppRoutingModule
   ],
