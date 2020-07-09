@@ -14,4 +14,8 @@ export class UserSettingsService {
   postUserSettingsForm(settings: IUserSettings): Observable<any> {
     return this.http.post('https://putsreq.com/ZqJCki8PdPkTNE87R2K3', settings);
   }
+
+  getSubscriptionTypes(): Observable<string[]> {
+    return of(['Monthly', 'Annual', 'Lifetime']);
+  }
 }

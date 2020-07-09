@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IUserSettings } from './user-settings.model';
 import { UserSettingsService } from './user-settings.service';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pm-user-settings-form',
@@ -21,6 +22,7 @@ export class UserSettingsFormComponent implements OnInit {
   userSettings: IUserSettings = { ...this.originalUsersettings };
   postError = false;
   postErrorMessage = '';
+  subscriptionTypes: Observable<string[]>;
 
   constructor(private dataService: UserSettingsService) { }
 
