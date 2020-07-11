@@ -61,4 +61,31 @@ export class DataService {
       tap(classicBook => console.log(classicBook))
     );
   }
+
+  addBook(newBook: Book): Observable<Book> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': 'mytoken'
+    });
+
+    return this.http.post<Book>('/api/books', newBook, { headers });
+  }
+
+  updateBook(book: Book): Observable<void> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': 'mytoken'
+    });
+
+    return this.http.put<void>(`/api/books/${book.bookID}`, book, { headers });
+  }
+
+  deleteBook(bookID: number): Observable<void> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': 'mytoken'
+    });
+
+    return this.http.delete<void>(`/api/books/${bookID}`, { headers });
+  }
 }

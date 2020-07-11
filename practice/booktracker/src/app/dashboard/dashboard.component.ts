@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-
-import { Book } from "app/models/book";
-import { Reader } from "app/models/reader";
 import { DataService } from 'app/core/data.service';
+import { Book } from 'app/models/book';
+import { Reader } from 'app/models/reader';
+
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styles: []
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
@@ -33,7 +31,15 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteBook(bookID: number): void {
-    console.warn(`Delete book not yet implemented (bookID: ${bookID}).`);
+    this.dataService.deleteBook(bookID)
+      .subscribe(
+        () => {
+          console.log('Deleted book successfully');
+          const index = this.allBooks.findIndex(book => book.bookID === bookID);
+          this.allBooks.splice(index, 1);
+        },
+        (err: any) => console.log(err)
+      )
   }
 
   deleteReader(readerID: number): void {

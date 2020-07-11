@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { Book } from 'app/models/book';
 import { DataService } from 'app/core/data.service';
+import { Book } from 'app/models/book';
 import { OldBook } from 'app/models/oldBook';
+
 
 @Component({
   selector: 'app-edit-book',
-  templateUrl: './edit-book.component.html',
-  styles: []
+  templateUrl: './edit-book.component.html'
 })
 export class EditBookComponent implements OnInit {
 
@@ -37,6 +36,10 @@ export class EditBookComponent implements OnInit {
   }
 
   saveChanges(): void {
-    console.warn('Save changes to book not yet implemented.');
+    this.dataService.updateBook(this.selectedBook)
+      .subscribe(
+        () => console.log('Saved changes successfully'),
+        (err: any) => console.log(err)
+      )
   }
 }
