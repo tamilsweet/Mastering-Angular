@@ -6,6 +6,8 @@ import { Book } from 'app/models/book';
 import { BookTrackerError } from 'app/models/bookTrackerError';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { OldBook } from 'app/models/oldBook';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +43,22 @@ export class DataService {
     return this.http.get<Book>(`/api/books/${id}`, {
       headers: headers
     });
+  }
+
+  getOldBookById(id: number): Observable<OldBook> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': 'mytoken'
+    });
+
+    return this.http.get<Book>(`/api/books/${id}`, {
+      headers: headers
+    }).pipe(
+      map((book: Book) => <OldBook>{
+        bookTitle: book.title,
+        year: book.publicationYear
+      }),
+      tap(classicBook => console.log(classicBook))
+    );
   }
 }
