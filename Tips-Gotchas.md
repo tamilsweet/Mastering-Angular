@@ -21,3 +21,25 @@
 - Forget to unsubscribe
 - Hot vs Cold observables
 - Self-subcribe or not. Subcribe in service or in component ?
+
+## RESTful CURD
+
+Create
+
+- POST - http://localhost/api/books
+  - If successful, returns HTTP 201 Created
+
+Read
+
+- GET - http://localhost/api/books or http://localhost/api/books/5
+  - If successful, return HTTP 200 OK
+
+Update
+
+- PUT - http://localhost/api/books/5
+  - If successful, return HTTP 204 No Content
+
+Delete
+
+- DELETE - http://localhost/api/books/5
+  - If successful, return HTTP 204 No Content
