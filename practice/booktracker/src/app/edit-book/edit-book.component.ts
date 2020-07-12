@@ -13,8 +13,10 @@ export class EditBookComponent implements OnInit {
 
   selectedBook: Book;
 
-  constructor(private route: ActivatedRoute,
-    private dataService: DataService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
     const bookID: number = +this.route.snapshot.params['id'];
