@@ -25,3 +25,10 @@ export class AddHeaderInterceptor implements HttpInterceptor {
 ```
 { provide: HTTP_INTERCEPTORS, userClass: FirstInterceptor, multi: true }
 ```
+
+## Cache HTTP Response with Interceptor
+
+- Provide a data structure for the cached items
+- Add items to the cache
+- Retrieve items from the cache
+- Remove items from the cache - cache invalidation
