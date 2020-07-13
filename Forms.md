@@ -4,11 +4,20 @@
 
 - Template-driven Forms
 
+  - Easy to use
   - Use a Component's Template
   - Unit Test Against DOM
+  - Two-way data binding -> Minimal component code
+  - Automatically tracks form and input element state
 
 - Reactive Forms
 
+  - More flexible -> for more complex scenarios
+  - Immutable data model
+  - Easier to perform an action on a value change
+  - ReactiveTransformations -> DebounceTime and DistinctUntilChanged
+  - Easliy add input elements dynamically
+  - Easier unit testing
   - Use a Component's Template
   - Create a Form Model in Typescript
   - Unit Test Against Form Model
