@@ -122,6 +122,15 @@ getStartTimeClass() {
 
 ```
 
+## Template reference variable
+
+- Used to reference model in template
+
+```
+<form (ngSubmit)="save" #signupForm="ngForm">
+<input #firstname="ngModel" name="fname" id="fname" [(ngModel)]="myform.fname" [class.error]="signupForm.submitted && firstname.invalid" />
+```
+
 ## Models for Type Safety
 
 - Use class or interface

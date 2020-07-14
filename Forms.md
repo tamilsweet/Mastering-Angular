@@ -10,6 +10,20 @@
   - Two-way data binding -> Minimal component code
   - Automatically tracks form and input element state
 
+  _Template_
+
+  - Form element
+  - Input element(s)
+  - Data binding
+  - Validation rules (attributes)
+  - Validation error messages
+  - Form model automatically generated
+
+  _Component Class_
+
+  - Properties for data binding (data model)
+  - Methods for form operation, such as getting data for display, save on submit
+
 - Reactive Forms
 
   - More flexible -> for more complex scenarios
@@ -23,6 +37,30 @@
   - Unit Test Against Form Model
   - Validation in Form Model
 
+  _Component Class_
+
+  - Form Model is created manually
+  - Validation Rules
+  - Validation error messages
+  - Properties for managing data (data model)
+  - Methods for form processing such as submit
+
+  _Template_
+
+  - Form element
+  - Input element(s)
+  - Binding to form model
+
+## Template Driven Forms
+
+- _Module:_ FormsModule
+- _Directives:_ ngForm, ngModel, ngModelGroup
+
+## Reactive Forms
+
+- _Module:_ ReactiveFormsModule
+- _Directives:_ formGroup, formControl, formControlName, formGroupName, formArrayName
+
 ## Template based forms
 
 - [(ngModel)] - use 2-way binding using [()], refered to as "Banana in a box" syntax
@@ -33,23 +71,32 @@
 - Use placeholder css rules to style error / required fields
 - Need FormsModule
 - Use `ngModelGroup` to nested object fields
-- `name` field is used to populate form value
+- `name` field is used to populate form value - Used as Form Control instance key
 - `ngSubmit` - triggered on both click on submit button as well as enter button.
 
 ```
 <form #loginform="ngForm" (ngSubmit)="login(loginform.value)">
-<em *ngIf="loginform.controls.username?.invalid && loginform.controls.username?.touched || mouseoverLogin">Required</em>
-<input (ngModel)="username" name="username" id="username" type="text" required pattern="[a-zA-Z].*" placeholder="Username" />
 
-<input (ngModel)="imageUrl" name="imageUrl" id="imageUrl" type="text" required pattern=".*\/.*.(png|jpg)" placeholder="Url of image..." />
+  <em *ngIf="loginform.controls.username?.invalid && loginform.controls.username?.touched || mouseoverLogin">Required</em>
+  <input (ngModel)="username" name="username" id="username"
+      type="text" required pattern="[a-zA-Z].*" placeholder="Username"
+      #usernameVar="ngModel"
+      [ngClass]="{'is-valid': usernameVar.touched && !usernameVar.valid }"
+      />
+      <span *ngIf="usernameVar.errors">Please enter username</span>
 
-<span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
-<button type="submit" [disabled]="loginform.invalid">Login</button>
+  <input (ngModel)="imageUrl" name="imageUrl" id="imageUrl" type="text" required pattern=".*\/.*.(png|jpg)" placeholder="Url of image..." />
 
-<div ngModelGroup="location">
-  <input (ngModel)="address" name="address" />
-  <input (ngModel)="country" name="country" >
-</div>
+  <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
+  <button type="submit" [disabled]="loginform.invalid">Login</button>
+  </span>
+
+  <div ngModelGroup="location">
+    <input (ngModel)="address" name="address" />
+    <input (ngModel)="country" name="country" >
+  </div>
+
+</form>
 ```
 
 ### Form Validation
@@ -62,6 +109,12 @@
   - maxlength
   - min
   - max
+
+### Form States
+
+- Value Changed => pristine | dirty
+- Validity => valid | error
+- Visited => touched | untouched
 
 #### _Validation Classes_
 
