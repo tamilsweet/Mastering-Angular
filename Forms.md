@@ -150,6 +150,21 @@
 - Need FormsModule, ReactiveFormsModule
 - Map with interface for type-safety before submit/save
 
+### Accessing the Form Model Properties
+
+### Accessing the Form Model Properties
+
+- `customerForm.controls.firstname.valid`
+- `customerForm.get('firstname').valid`
+- ```
+  firstname = new FormControl();
+  this.customerForm = new FormGroup({
+    firstname: this.firstname
+  })
+  ---
+  firstname.valid
+  ```
+
 ```
 this.firstname = new FormControl(this.authService.currentUser.firstname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
 this.lastname = new FormControl(this.authService.currentUser.lastname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
@@ -206,4 +221,36 @@ private restrictedWords(control: FormControl): {[key: string]: any} {
     ? { 'restrictedWords': 'foo' }
     : null
 }
+```
+
+## Using setValue and patchValue
+
+- setValue to set all of formControls on the form model
+- patchValue to some of the formControls on the form model
+
+## Form Builder
+
+- Creates a form model from a configuration
+- Shortens bolierplate code
+- Provided as a service
+
+### FormBuilder's FormControl Syntax
+
+```
+this.customerForm = this.fb.group({
+  firstName: '',
+  sendCatalog: true
+});
+
+
+this.customerForm = this.fb.group({
+  firstName: { value: 'n/a', disabled: true },
+  sendCatalog: { value: true, disabled: false }
+});
+
+
+this.customerForm = this.fb.group({
+  firstName: [''],
+  sendCatalog: [{ value: true, disabled: false }]
+});
 ```
