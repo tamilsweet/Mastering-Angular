@@ -152,8 +152,6 @@
 
 ### Accessing the Form Model Properties
 
-### Accessing the Form Model Properties
-
 - `customerForm.controls.firstname.valid`
 - `customerForm.get('firstname').valid`
 - ```
@@ -191,38 +189,6 @@ validateLastname() {
 
 ```
 
-## Custom Validators
-
-```
-[this.restrictedWords]
-
-private restrictedWords(control: FormControl): {[key: string]: any} {
-  return control.value.includes('foo')
-    ? { 'restrictedWords': 'foo' }
-    : null
-}
-
-function restrictedWords(words: string[]) {
-  return (control: FormControl): {[key: string]: any} => {
-    if(!words) {
-      return null;
-    }
-
-    var invalidWords = words.map(w => control.value.includes(w) ? w : null).filter(w => w !== null);
-
-    return invalidWords && invalidWords.length > 0
-      ? { 'restrictedWords': invalidWords.join(', ') }
-      : null
-  }
-}
-
-private restrictedWords(control: FormControl): {[key: string]: any} {
-  return control.value.includes('foo')
-    ? { 'restrictedWords': 'foo' }
-    : null
-}
-```
-
 ## Using setValue and patchValue
 
 - setValue to set all of formControls on the form model
@@ -255,6 +221,14 @@ this.customerForm = this.fb.group({
 });
 ```
 
+### Benefits of FormGroup
+
+- Match the value of the form model to the data model
+- Check touched, dirty and valid state
+- Watch for changes and react as needed
+- Perform cross field validation
+- Dynamically duplicate the group
+
 ### Adjusting Validation Rules at Runtime
 
 ```
@@ -280,6 +254,7 @@ eg.
 ## Custom Validators
 
 ```
+// Example 1
 // Simple Validator
 function myValidator(c: AbstractControl): { [key: string]: boolean } | null {
   if(somethingWrong) {
@@ -295,6 +270,32 @@ function myValidator(params: any): ValidatorFn {
       return { 'myValidator': true };
     }
     return null;
+  }
+}
+
+// Example 2
+
+[this.restrictedWords]
+
+private restrictedWords(control: FormControl): {[key: string]: any} {
+  return control.value.includes('foo')
+    ? { 'restrictedWords': 'foo' }
+    : null
+}
+
+[this.restrictedWords(restrictedList)]
+
+function restrictedWords(words: string[]) {
+  return (control: FormControl): {[key: string]: any} => {
+    if(!words) {
+      return null;
+    }
+
+    var invalidWords = words.map(w => control.value.includes(w) ? w : null).filter(w => w !== null);
+
+    return invalidWords && invalidWords.length > 0
+      ? { 'restrictedWords': invalidWords.join(', ') }
+      : null
   }
 }
 ```
@@ -398,4 +399,69 @@ phoneControl.statusChanges.subscribe();
       .subscribe(
         value => this.setMessage(emailControl)
       );
+```
+
+## Dynamically Duplicate Input Elements
+
+- Define the input element to duplicate
+- Define a FormGroup to duplicate multiple input element(s)
+- Refactor to make copies
+- Create a FormArray
+- Loop through the FormArray
+
+### Creating a FormArray
+
+```
+this.myArray = new FormArray([...]);
+
+this.myArray = this.fb.array([...]);
+```
+
+```
+// Getter for addresses formGroup
+  get addresses(): FormArray {
+    return this.customerForm.get('addresses') as FormArray;
+  }
+
+// Use formGroup from formArray
+this.customerForm = this.fb.group({
+  ...
+  addresses: this.fb.array([this.buildAddress()])
+  ...
+});
+
+
+// Build formGroup dynamically
+  buildAddress(): FormGroup {
+    return this.fb.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      state: '',
+      pincode: null
+    });
+  }
+
+// Add formGroup and add to formArray
+  addAddress(): void {
+    this.addresses.push(this.buildAddress());
+  }
+
+// Update html
+// Add *ngFor and use index for formGroupName
+// Added index to id and for. Use attr.for instead of for
+<div formArrayName="addresses" *ngFor="let address of addresses.controls; let i = index;">
+  <div [formGroupName]="i">
+    ...
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" attr.for="{{ 'street1' + i }}">Street Address 1</label>
+      <div class="col-md-8">
+        <input type="text" class="form-control" name="street1" id="{{ 'street1' + i }}"
+            formControlName="street1" placeholder=" Street Address" />
+      </div>
+    </div>
+    ...
+  </div>
+</div>
 ```
