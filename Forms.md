@@ -254,3 +254,25 @@ this.customerForm = this.fb.group({
   sendCatalog: [{ value: true, disabled: false }]
 });
 ```
+
+### Adjusting Validation Rules at Runtime
+
+```
+myControl.setValidators(Validators.required);
+myControl.setValidators([Validators.required, Validators.maxLength(50)]);
+myControl.clearValidators();
+myControl.updateValueAndValidity();
+
+
+eg.
+
+  setNotification(notifyVia: string): void {
+    const phoneControl = this.customerForm.get('phone');
+    if (notifyVia === 'text') {
+      phoneControl.setValidators(Validators.required);
+    } else {
+      phoneControl.clearValidators();
+    }
+    phoneControl.updateValueAndValidity();
+  }
+```

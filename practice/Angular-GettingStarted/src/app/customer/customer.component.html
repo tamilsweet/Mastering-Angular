@@ -3,14 +3,16 @@
     Sign Up!
   </div>
   <div class="card-body">
-    <form [formGroup]="customerForm" (ngSubmit)="save()">
+    <form novalidate [formGroup]="customerForm" (ngSubmit)="save()">
 
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="firstName">First Name</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="firstName" formControlName="firstName" required minlength="3"
-            [ngClass]="{ 'is-valid': (customerForm.get('firstName').touched || customerForm.get('firstName').dirty) && customerForm.get('firstName').invalid }"
-            placeholder="First Name (required)" />
+          <input type="text" class="form-control" id="firstName" formControlName="firstName"
+            placeholder="First Name (required)" [ngClass]="{
+              'is-invalid': (customerForm.get('firstName').touched || customerForm.get('firstName').dirty) && customerForm.get('firstName').invalid,
+              'is-valid': customerForm.get('firstName').valid
+            }" />
           <span class="invalid-feedback">
             <span *ngIf="customerForm.get('firstName').errors?.required">
               Please enter your first name.
@@ -21,12 +23,15 @@
           </span>
         </div>
       </div>
+
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="lastName">Last Name</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" id="lastName" formControlName="lastName" required minlength="3"
-            [ngClass]="{ 'is-valid': (customerForm.get('lastName').touched || customerForm.get('lastName').dirty) && customerForm.get('lastName').invalid }"
-            placeholder="Last Name (required)">
+          <input type="text" class="form-control" id="lastName" formControlName="lastName"
+            placeholder="Last Name (required)" [ngClass]="{
+            'is-invalid': (customerForm.get('lastName').touched || customerForm.get('lastName').dirty) && customerForm.get('lastName').invalid,
+            'is-valid': customerForm.get('lastName').valid
+           }">
           <span class="invalid-feedback">
             <span *ngIf="customerForm.get('lastName').errors?.required">
               Please enter your last name.
@@ -37,12 +42,15 @@
           </span>
         </div>
       </div>
+
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="email">Email</label>
         <div class="col-md-8">
-          <input type="email" class="form-control" id="email" formControlName="email" required
-            [ngClass]="{ 'is-valid': (customerForm.get('email').touched || customerForm.get('email').dirty) && customerForm.get('email').invalid }"
-            placeholder="Email (required)">
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email (required)"
+            [ngClass]="{
+              'is-invalid': (customerForm.get('email').touched || customerForm.get('email').dirty) && customerForm.get('email').invalid,
+              'is-valid': customerForm.get('email').valid
+             }">
           <span class="invalid-feedback">
             <span *ngIf="customerForm.get('email').errors?.required">
               Please enter valid email address.
@@ -50,6 +58,40 @@
           </span>
         </div>
       </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="phone">Phone</label>
+        <div class="col-md-8">
+          <input type="phone" class="form-control" id="phone" formControlName="phone" [ngClass]="{
+              'is-invalid': (customerForm.get('phone').touched || customerForm.get('phone').dirty) && !customerForm.get('phone').valid,
+              'is-valid': customerForm.get('notification').value === 'text' && customerForm.get('phone').valid
+             }" placeholder="Phone">
+          <span class="invalid-feedback">
+            <span *ngIf="customerForm.get('phone').errors?.required">
+              Please enter your phone number.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label pt-0">Send Notifications</label>
+        <div class="col-md-8">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="notification" value="email"
+                (click)="setNotification('email')" /> Email
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" formControlName="notification" value="text"
+                (click)="setNotification('text')" /> Text
+            </label>
+          </div>
+        </div>
+      </div>
+
       <div class="form-check form-group row mb-2">
         <div class="col-md-10">
           <input type="checkbox" class="form-check-input" formControlName="sendCatalog" id="sendCatalog">
