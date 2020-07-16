@@ -276,3 +276,25 @@ eg.
     phoneControl.updateValueAndValidity();
   }
 ```
+
+## Custom Validators
+
+```
+// Simple Validator
+function myValidator(c: AbstractControl): { [key: string]: boolean } | null {
+  if(somethingWrong) {
+    return { 'myValidator': true };
+  }
+  return null;
+}
+
+// Validator with parameters - Use factory function
+function myValidator(params: any): ValidatorFn {
+  return (c: AbstractControl): { [key: string]: boolean } | null => {
+    if(somethingWrong) {
+      return { 'myValidator': true };
+    }
+    return null;
+  }
+}
+```
