@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">Add Product</div>
+  <div class="card-body">
+    <form [formGroup]="productForm" (ngSubmit)="save()">
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="productName">Product Name</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="productName" formControlName="productName"
+            placeholder="Name (required)" [ngClass]="{
+              'is-valid': (productForm.get('productName').touched || productForm.get('productName').dirty) && !productForm.get('productName').invalid,
+              'is-invalid': productForm.get('productName').dirty && productForm.get('productName').errors
+            }" />
+          <span class="invalid-feedback">
+            <span *ngIf="productForm.get('productName').errors?.required">
+              Please enter product name.
+            </span>
+            <span *ngIf="productForm.get('productName').errors?.minlength">
+              Product name must be 3 or more characters.
+            </span>
+            <span *ngIf="productForm.get('productName').errors?.maxlength">
+              Product name must be 50 characters or less.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="productCode">Product Code</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="productCode" formControlName="productCode"
+            placeholder="Code (required)" [ngClass]="{
+              'is-valid': (productForm.get('productCode').touched || productForm.get('productCode').dirty) && !productForm.get('productCode').invalid,
+              'is-invalid': productForm.get('productCode').dirty && productForm.get('productCode').errors
+            }" />
+        </div>
+        <span class="invalid-feedback">
+          <span *ngIf="productForm.get('productCode').errors?.required">
+            Please enter product code.
+          </span>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
