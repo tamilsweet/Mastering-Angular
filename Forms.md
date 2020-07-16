@@ -298,3 +298,44 @@ function myValidator(params: any): ValidatorFn {
   }
 }
 ```
+
+## Cross-field Validation: Nested FormGroup
+
+```
+function dateCompare(c: AbstractControl): { [key: string]: boolean } | null {
+  const startControl = c.get('start');
+  const endControl = c.get('end');
+  if(startControl.value !== endControl.value) {
+    return { 'match': true };
+  }
+  return null;
+}
+// or
+function dateCompare(params: any): ValidatorFn {
+  return (c:AbstractControl): { [key: string]: boolean } | null => {
+    const startControl = c.get('start');
+    const endControl = c.get('end');
+    if(startControl.value !== endControl.value) {
+      return { 'match': true };
+    }
+    return null;
+  }
+}
+
+this.customerForm = this.fb.group({
+  firstName: ['', [Validators.required, Validators.minLength(3)]],
+  lastName: ['', [Validators.required, Validators.minLength(3)]],
+  availability: this.fb.group({
+    start: ['', Validators.required],
+    end: ['', Validators.required]
+  }, { validator: dateCompare })
+});
+
+<div formGroupName="availability">
+  ...
+  <input formControlName="start" />
+  ...
+  <input formControlName="end" />
+  ...
+</div>
+```

@@ -12,6 +12,19 @@ function ratingRange(min: number, max: number): ValidatorFn {
   };
 }
 
+function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
+  const emailControl = c.get('email');
+  const confirmEmailControl = c.get('confirmEmail');
+  if (emailControl.pristine || confirmEmailControl.pristine) {
+    return null;
+  }
+
+  if (emailControl.value === confirmEmailControl.value) {
+    return null;
+  }
+  return { 'match': true };
+}
+
 @Component({
   selector: 'pm-customer',
   templateUrl: './customer.component.html',
@@ -28,17 +41,13 @@ export class CustomerComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    // this.customerForm = new FormGroup({
-    //   firstName: new FormControl(),
-    //   lastName: new FormControl(),
-    //   email: new FormControl(),
-    //   sendCatalog: new FormControl(true),
-    // });
-
     this.customerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
+      emailGroup: this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', Validators.required]
+      }, { validator: emailMatcher }),
       phone: '',
       notification: 'email',
       rating: [null, ratingRange(1, 5)],
