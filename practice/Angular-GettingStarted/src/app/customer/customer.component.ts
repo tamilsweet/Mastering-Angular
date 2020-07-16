@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 import { Customer, STATE_LIST } from './customer.model';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 
 function ratingRange(min: number, max: number): ValidatorFn {
@@ -38,6 +39,12 @@ export class CustomerComponent implements OnInit {
   customerErrorMessage = '';
   stateList = STATE_LIST;
 
+  emailMessages: string;
+  private validationMessages = {
+    required: 'Please enter your email address.',
+    email: 'Please enter a valid email address.'
+  };
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -53,10 +60,35 @@ export class CustomerComponent implements OnInit {
       rating: [null, ratingRange(1, 5)],
       sendCatalog: false
     });
+    this.subscribeChanges();
+  }
+
+  subscribeChanges() {
+    this.customerForm.get('notification').valueChanges
+      .subscribe(
+        value => this.setNotification(value)
+      );
+
+    const emailControl = this.customerForm.get('emailGroup.email');
+    emailControl.valueChanges
+      .pipe(
+        debounceTime(1000)
+      )
+      .subscribe(
+        value => this.setMessage(emailControl)
+      );
+  }
+
+  setMessage(c: AbstractControl): void {
+    this.emailMessages = '';
+    if ((c.touched || c.dirty) && c.errors) {
+      this.emailMessages = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
+    }
   }
 
   setNotification(notifyVia: string): void {
     const phoneControl = this.customerForm.get('phone');
+    console.log(notifyVia);
     if (notifyVia === 'text') {
       phoneControl.setValidators(Validators.required);
     } else {

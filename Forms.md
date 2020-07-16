@@ -339,3 +339,63 @@ this.customerForm = this.fb.group({
   ...
 </div>
 ```
+
+## Watching
+
+- Use valueChanges or statusChanges Observable property
+- Subscribe to Observable
+
+```
+const phoneControl = this.customerForm.get('phone');
+phoneControl.valueChanges.subscribe();
+phoneControl.statusChanges.subscribe();
+```
+
+### Reacting
+
+- Adjust validation rules
+- Handle validation messages
+- Modify user interface elements
+- Provide automatic suggestions
+
+```
+  // ngOnInit
+  const emailControl = this.customerForm.get('emailGroup.email');
+  emailControl.valueChanges.subscribe(
+    value => this.setMessage(emailControl)
+  );
+
+  setMessage(c: AbstractControl): void {
+    this.emailMessages = '';
+    if ((c.touched || c.dirty) && c.errors) {
+      this.emailMessages = Object.keys(c.errors).map(key => this.validationMessages[key]).join(' ');
+    }
+  }
+```
+
+## Reactive Transforms
+
+- _debounceTime_
+
+  - Ignores events until a specific time has passed without another event
+  - debounceTime(1000) waits for 1000ms (1s) of no events before emitting another event
+
+- _throttleTime_
+
+  - Emits a value, then ignores subsequent values for a specific amount of time
+  - Useful when receiving too many events like mouse movements.
+
+- _distinctUntilChanged_
+  - Suppresses duplicate consecutive items
+  - Useful when tracking key events to prevent events when only control or shift keys changed
+
+```
+    const emailControl = this.customerForm.get('emailGroup.email');
+    emailControl.valueChanges
+      .pipe(
+        debounceTime(1000)
+      )
+      .subscribe(
+        value => this.setMessage(emailControl)
+      );
+```

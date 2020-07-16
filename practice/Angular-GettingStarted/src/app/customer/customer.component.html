@@ -49,13 +49,11 @@
           <div class="col-md-8">
             <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email (required)"
               [ngClass]="{
-              'is-invalid': customerForm.get('emailGroup').errors || ((customerForm.get('emailGroup.email').touched || customerForm.get('emailGroup.email').dirty) && customerForm.get('emailGroup.email').invalid),
+              'is-invalid': emailMessages,
               'is-valid': customerForm.get('emailGroup.email').valid
              }">
             <span class="invalid-feedback">
-              <span *ngIf="customerForm.get('emailGroup.email').errors?.required">
-                Please enter valid email address.
-              </span>
+              {{ emailMessages }}
             </span>
           </div>
         </div>
@@ -99,14 +97,12 @@
         <div class="col-md-8">
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input type="radio" class="form-check-input" formControlName="notification" value="email"
-                (click)="setNotification('email')" /> Email
+              <input type="radio" class="form-check-input" formControlName="notification" value="email" /> Email
             </label>
           </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input type="radio" class="form-check-input" formControlName="notification" value="text"
-                (click)="setNotification('text')" /> Text
+              <input type="radio" class="form-check-input" formControlName="notification" value="text" /> Text
             </label>
           </div>
         </div>
