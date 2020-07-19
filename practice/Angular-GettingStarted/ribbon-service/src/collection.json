@@ -1,0 +1,9 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ribbon-service": {
+      "description": "A blank schematic.",
+      "factory": "./ribbon-service/index#ribbonService"
+    }
+  }
+}
