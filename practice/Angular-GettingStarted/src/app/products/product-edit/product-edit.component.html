@@ -23,6 +23,7 @@
           </span>
         </div>
       </div>
+
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="productCode">Product Code</label>
         <div class="col-md-6">
@@ -37,6 +38,72 @@
             Please enter product code.
           </span>
         </span>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="starRating">Star Rating (1-5)</label>
+        <div class="col-md-6">
+          <input type="number" class="form-control" id="starRating" formControlName="starRating" step="0.1"
+            placeholder="Rating 1-5" [ngClass]="{
+                    'is-valid': (productForm.get('starRating').touched || productForm.get('starRating').dirty) && !productForm.get('starRating').invalid,
+                    'is-invalid': productForm.get('starRating').dirty && productForm.get('starRating').errors
+                  }" />
+        </div>
+        <span class="invalid-feedback">
+          <span *ngIf="productForm.get('starRating').errors?.required">
+            Please enter product's star rating.
+          </span>
+          <span *ngIf="productForm.get('starRating').errors?.range">
+            Rate the product between 1(lowest) and 5(highest).
+          </span>
+        </span>
+      </div>
+
+      <div formArrayName="tags" *ngFor="let tag of tags.controls; let i = index;">
+        <div formGroupName="{{i}}">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="tag{{i}}">Tag</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="tag{{i}}" formControlName="tag" [ngClass]="{
+                          'is-valid': (tags.get('tag').touched || tags.get('tag').dirty) && !tags.get('tag').invalid,
+                          'is-invalid': tags.get('tag').dirty && tags.get('tag').errors
+                        }" />
+            </div>
+            <span class="invalid-feedback">
+              <span *ngIf="tags.get('tag').errors?.minlength">
+                Tag must be 3 characters or more.
+              </span>
+            </span>
+            <div class="col-md-2">
+              <button class="btn btn-outline-warning">Delete Tag</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="col-md-2 col-form-label">
+          <button class="btn btn-sm btn-outline-primary">Add Tag</button>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="description">Description</label>
+        <div class="col-md-6">
+          <textarea rows="4" class="form-control" id="description" formControlName="description"
+            placeholder="Product Description" [ngClass]="{
+                    'is-valid': (productForm.get('description').touched || productForm.get('description').dirty) && !productForm.get('description').invalid,
+                    'is-invalid': productForm.get('description').dirty && productForm.get('description').errors
+                  }"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="col-md-6 prefix-col-2">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="reset" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
       </div>
     </form>
   </div>

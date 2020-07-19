@@ -9,7 +9,7 @@ import { ProductListComponent } from './product-list.component';
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent, canActivate: [ProductDetailGuard] },
-  { path: 'products/:id/edit', component: ProductEditComponent, canActivate: [ProductEditGuard] },
+  { path: 'products/:id/edit', component: ProductEditComponent, canDeactivate: [ProductEditGuard] },
 ];
 
 

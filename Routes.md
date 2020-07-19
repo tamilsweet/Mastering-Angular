@@ -15,7 +15,7 @@
 ```
   { path: 'products/:id', component: ProductDetailComponent },
 
-<a [routerLink]="['/products', product.productId]">{{product.productName}}</a>
+<a [routerLink]="['/products', product.id]">{{product.productName}}</a>
 ```
 
 ## Reading route parameter
