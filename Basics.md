@@ -72,7 +72,7 @@ _Expression Recommendations in Interpolation_
 
 - \* denotes structural directive
 
-## Safe-Navigation Operator
+## Safe Navigation Operator or Elvis Operator
 
 ```
 <h2>{{event?.location?.address}}</h2>

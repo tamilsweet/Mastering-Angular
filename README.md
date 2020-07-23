@@ -159,3 +159,12 @@ export class SimpleComponent extends BaseComponent implements OnInit {
 - Do not store sensitive data in the browser
 - If an API requries a "secret" to be passed, consider calling it through a "middle-man" service that you own
 - Use JWT tokens where possible for server authentication (set appropriate TTL expiration for tokens)
+
+## ILL-ities
+
+- Usability
+- Testability
+- Predictability
+- Discoverability
+- Maintainability
+- Immutability
