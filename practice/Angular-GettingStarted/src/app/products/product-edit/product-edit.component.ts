@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { IProduct } from '../product.model';
 import { Subscription } from 'rxjs';
@@ -33,6 +33,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService
   ) {
     this.validationMessages = {
@@ -109,7 +110,49 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteProduct(): void {
+    if (this.product.id === 0) {
+      // Don't delete, it was never saved.
+      this.onSaveComplete();
+    } else {
+      if (confirm(`Really delete the product: ${this.product.productName}?`)) {
+        this.productService.deleteProduct(this.product.id)
+          .subscribe(
+            () => this.onSaveComplete(),
+            err => this.errorMesssage = err
+          );
+      }
+    }
+  }
+
   save(): void {
-    console.log('Save form here...');
+    if (this.productForm.valid) {
+      if (this.productForm.dirty) {
+        const p = { ...this.product, ...this.productForm.value };
+        if (p.id === 0) {
+          this.productService.createProduct(p)
+            .subscribe(
+              () => this.onSaveComplete(),
+              err => this.errorMesssage = err
+            );
+        } else {
+          this.productService.updateProduct(p)
+            .subscribe(
+              () => this.onSaveComplete(),
+              err => this.errorMesssage = err
+            );
+        }
+      } else {
+        this.onSaveComplete();
+      }
+    } else {
+      this.errorMesssage = 'Please correct the validation errors.';
+    }
+  }
+
+  onSaveComplete() {
+    // Reset the form to clear the flags
+    this.productForm.reset();
+    this.router.navigate(['/products']);
   }
 }
