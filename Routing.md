@@ -1,5 +1,13 @@
 # Routing
 
+## Defining base path
+
+```
+<base href="/" >
+```
+
+- Use cli to set it during build time `ng build --base-href /ui/`
+
 ## How Routing Works
 
 - Configure a route for each component
