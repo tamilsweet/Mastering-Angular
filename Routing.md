@@ -16,6 +16,21 @@
 - Activate the route based on user action
 - Activating a route displays the component's view
 
+## Importing the Angular Router
+
+- RouterModule.forRoot()
+
+  - Declares the router directives
+  - Manages our route configuarion
+  - Registers the router service
+  - Used once per application
+
+- RouterModule.forChild()
+  - Declares the router directives
+  - Manages our route configuarion
+  - Does NOT register the router service
+  - Used in feature modules
+
 ## Passing paramter to route
 
 - `:<placeholder>` - colon and placeholder
@@ -34,6 +49,12 @@ constructor(private route: ActivatedRoute) {
   let productId = +this.route.snapshot.paramMap.get('id');
 }
 ```
+
+## Router Directives
+
+- RouterLink
+- RouterLinkActive
+- RouterOutlet
 
 ## Router Link
 

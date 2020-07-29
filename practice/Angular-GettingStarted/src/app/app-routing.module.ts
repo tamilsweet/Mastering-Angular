@@ -6,13 +6,6 @@ import { UserSettingsFormComponent } from './user-settings-form/user-settings-fo
 import { SignupComponent } from './signup/signup.component';
 import { CustomerComponent } from './customer/customer.component';
 
-export const AppComponentList = [
-  WelcomeComponent,
-  PageNotFoundComponent,
-  SignupComponent,
-  CustomerComponent
-];
-
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'settings', component: UserSettingsFormComponent },
