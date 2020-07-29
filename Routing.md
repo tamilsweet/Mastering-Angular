@@ -31,6 +31,41 @@
   - Does NOT register the router service
   - Used in feature modules
 
+## Redirect
+
+- use `redirectTo` in route config
+- Redirect occurs only once
+- relative redirect / absolute redirect
+- `pathMatch` is must
+
+## Router Directives
+
+- RouterLink
+- RouterLinkActive
+- RouterOutlet
+
+## RouterLink
+
+```
+<a [routerLink]="['/events']">
+<a routerLink="/events">
+```
+
+## Browser Url Styles
+
+- HTML 5 style `.../welcome`
+
+  - Leverages HTML5 history pushState
+  - Default
+  - More natural
+  - Requires Url rewriting
+
+- Hash-based `.../#/welcome`
+
+  - Leverages Url fragments
+  - Must be set with { useHash: true }
+  - Does not require Url rewriting
+
 ## Passing paramter to route
 
 - `:<placeholder>` - colon and placeholder
@@ -41,6 +76,8 @@
 <a [routerLink]="['/products', product.id]">{{product.productName}}</a>
 ```
 
+- `['/products', product.id]` is link parameters array
+
 ## Reading route parameter
 
 ```
@@ -48,20 +85,6 @@ constructor(private route: ActivatedRoute) {
   let productId = +this.route.snapshot.params['id'];
   let productId = +this.route.snapshot.paramMap.get('id');
 }
-```
-
-## Router Directives
-
-- RouterLink
-- RouterLinkActive
-- RouterOutlet
-
-## Router Link
-
-```
-<div [routerLink]="['/events', event.id]">
-...
-</div>
 ```
 
 ## Navigate
@@ -91,37 +114,35 @@ CLI: `ng g g product-detail`
 
 @Injectable()
 export class EventListResolver implements Resolve<any> {
-  resolve() {
-    return this.eventService.getEvents().pipe(map(events => events));
-  }
+resolve() {
+return this.eventService.getEvents().pipe(map(events => events));
+}
 }
 
 { path: 'events', component: EventListComponent, resolve: { events:EventListResolver }}
 
-
 ngOnInit() {
-  this.events = this.route.snapshot.data['events];
+this.events = this.route.snapshot.data['events];
 }
-
 
 // Doesnt work if trying to navigate in same Component
 ngOnInit() {
-  this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
 }
 
 // Allows navigating within same component
 ngOnInit() {
-  this.route.params.forEach((params: Params) => {
-    this.event = this.eventService.getEvent(+params['id']);
-    // Also reset remaining state to default
-  });
+this.route.params.forEach((params: Params) => {
+this.event = this.eventService.getEvent(+params['id']);
+// Also reset remaining state to default
+});
 }
 
 // Using resolver for component with same component routing
 ngOnInit() {
-  this.route.data.forEach((data) => {
-    this.event = data['event'];
-  });
+this.route.data.forEach((data) => {
+this.event = data['event'];
+});
 }
 
 ```
@@ -129,5 +150,11 @@ ngOnInit() {
 ## Styling Active Link
 
 ```
+
 <a [routerLink]="[/events]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Events</a>
+
+```
+
+```
+
 ```
