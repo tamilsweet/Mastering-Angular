@@ -1,4 +1,4 @@
-# Routes
+# Routing
 
 ## How Routing Works
 
