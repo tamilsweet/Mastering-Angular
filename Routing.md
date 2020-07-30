@@ -31,6 +31,15 @@
   - Does NOT register the router service
   - Used in feature modules
 
+## Routes
+
+- Url segment(s)
+- No leading slash
+- '' for default route;
+- "\*\*" for wildcard route
+- Case sensitive
+- Order matters
+
 ## Redirect
 
 - use `redirectTo` in route config
@@ -77,6 +86,8 @@
 ```
 
 - `['/products', product.id]` is link parameters array
+- First element is root/parent Url segment
+- All other elements are route parameters or additional Url segments
 
 ## Reading route parameter
 
