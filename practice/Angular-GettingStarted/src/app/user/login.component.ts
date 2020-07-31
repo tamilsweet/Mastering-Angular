@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'pm-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  errorMessage: string;
+  pageTitle: 'Log In';
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
+  login(loginForm: NgForm) {
+    if (loginForm && loginForm.valid) {
+      const userName = loginForm.form.value.userName;
+      const password = loginForm.form.value.password;
+      this.authService.login(userName, password);
+
+      this.router.navigate(['/products']);
+    } else {
+      this.errorMessage = 'Please enter a username and password';
+    }
   }
 
 }

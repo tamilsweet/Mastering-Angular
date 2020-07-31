@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="card">
+  <div class="card-header">
+    Sign Up!
+  </div>
+  <div class="card-body">
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <div class="form-group row">
+        <label class="col-md-2" for="username">Username</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" name="username" id="username" [(ngModel)]="username" required
+            #username="ngModel" [class.field-error]="loginForm.submitted && loginForm.invalid"
+            placeholder="Username (required)">
+          <div [hidden]="!loginForm.submitted || username.valid" class="alert alert-danger">Please enter valid username
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2" for="password">Password</label>
+        <div class="col-md-8">
+          <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" required
+            #password="ngModel" [class.field-error]="loginForm.submitted && loginForm.invalid"
+            placeholder="Password (required)">
+          <div [hidden]="!loginForm.submitted || username.valid" class="alert alert-danger">Please enter valid password
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 offset-md-2 mb-2">
+          <button type="submit" class="btn btn-primary mr-3"
+            [title]="loginForm.valid ? 'Login' : 'Disabled until the form is valid'"
+            [disabled]="!loginForm.valid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
