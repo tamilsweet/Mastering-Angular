@@ -1,12 +1,12 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CustomerComponent } from './customer/customer.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './shared/page-not-found.component';
-import { UserSettingsFormComponent } from './user-settings-form/user-settings-form.component';
 import { SignupComponent } from './signup/signup.component';
-import { CustomerComponent } from './customer/customer.component';
+import { UserSettingsFormComponent } from './user-settings-form/user-settings-form.component';
 
-const routes: Routes = [
+const ROUTES: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'settings', component: UserSettingsFormComponent },
   { path: 'signup', component: SignupComponent },
@@ -16,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
