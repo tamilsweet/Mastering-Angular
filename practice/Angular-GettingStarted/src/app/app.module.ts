@@ -25,6 +25,8 @@ import { MessagesModule } from './messages/messages.module';
     WelcomeComponent,
     PageNotFoundComponent,
     UserSettingsFormComponent,
+    SignupComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,

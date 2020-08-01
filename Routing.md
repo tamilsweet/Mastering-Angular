@@ -93,11 +93,22 @@
 
 ## Reading route parameter
 
+### Using route snapshot
+
 ```
 constructor(private route: ActivatedRoute) {
   let productId = +this.route.snapshot.params['id'];
   let productId = +this.route.snapshot.paramMap.get('id');
 }
+```
+
+### Using route Observable
+
+```
+  this.route.paramMap
+    .subscribe(
+      params => { const id = params.get('id); }
+    )
 ```
 
 ## Navigate

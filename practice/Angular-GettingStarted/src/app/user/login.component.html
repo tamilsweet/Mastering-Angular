@@ -3,11 +3,11 @@
     Sign Up!
   </div>
   <div class="card-body">
-    <form #loginForm="ngForm" (ngSubmit)="login()">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <div class="form-group row">
         <label class="col-md-2" for="username">Username</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="username" id="username" [(ngModel)]="username" required
+          <input type="text" class="form-control" name="username" id="username" [ngModel]="username" required
             #username="ngModel" [class.field-error]="loginForm.submitted && loginForm.invalid"
             placeholder="Username (required)">
           <div [hidden]="!loginForm.submitted || username.valid" class="alert alert-danger">Please enter valid username
@@ -17,7 +17,7 @@
       <div class="form-group row">
         <label class="col-md-2" for="password">Password</label>
         <div class="col-md-8">
-          <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" required
+          <input type="password" class="form-control" name="password" id="password" [ngModel]="password" required
             #password="ngModel" [class.field-error]="loginForm.submitted && loginForm.invalid"
             placeholder="Password (required)">
           <div [hidden]="!loginForm.submitted || username.valid" class="alert alert-danger">Please enter valid password
