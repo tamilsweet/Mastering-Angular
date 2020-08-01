@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConvertToSpacesPipe } from './convert-to-spaces.pipe';
 import { StarComponent } from './star.component';
 
@@ -19,7 +19,8 @@ import { StarComponent } from './star.component';
     ConvertToSpacesPipe,
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

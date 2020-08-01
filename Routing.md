@@ -75,7 +75,9 @@
   - Must be set with { useHash: true }
   - Does not require Url rewriting
 
-## Passing paramter to route
+## Route Parameters
+
+### Passing paramter to route
 
 - `:<placeholder>` - colon and placeholder
 
