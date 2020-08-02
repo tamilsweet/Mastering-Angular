@@ -111,6 +111,62 @@ constructor(private route: ActivatedRoute) {
     )
 ```
 
+### Snapshot vs Observable
+
+- Snapshot
+
+  - to read the parameters only once and it doesn't change
+  - Simple code
+
+- Observable
+  - to watch for parameter changes
+
+## Optional Router Parameters
+
+```
+[routerLink]="['/products', { name: productName, code: productCode, startDate: availabilityStart, endDate: availabilityEnd }]"
+
+localhost:4200/products;name=Controller;code=gmg;startDate=March%201%2C%202018;endDate=March%201%2C%202019
+```
+
+## Query Parameters
+
+- Not part of route configuration
+- Passed separately
+- second argument to navigate array
+
+```
+[queryParams]="{ filterBy: 'er', showImage: true }"
+
+this.router.navigate(
+  ['/products'],
+  {
+    queryParams: { filterBy: 'er', showImage: true }
+  }
+)
+```
+
+### Preserve Query Params
+
+- Query params are lost by default
+
+```
+<a [routerLink]="['/products']"
+  queryParamsHandling="preserve">
+  Back
+</a>
+
+this.router.navigate(['/products'], { queryParamsHandling: 'preserve' });
+```
+
+## Route's Data Property
+
+```
+{ path: 'products', component: ProductListComponent, data: { pageTitle: 'Product List' }}
+
+this.pageTitle = this.route.snapshot.data['pageTitle'];
+```
+
 ## Navigate
 
 ```
@@ -130,7 +186,15 @@ CLI: `ng g g product-detail`
 - CanLoad
   - Prevent asynchronous routing
 
-## Resolver Pattern
+## Router Resolver
+
+### Benefits of Prefetching Data
+
+- Prevents display of a partial page
+- Reuses code
+- Improves flow when an error occurs
+
+### Resolver Pattern
 
 - Resolver will subscribe automatically
 
@@ -174,11 +238,5 @@ this.event = data['event'];
 ## Styling Active Link
 
 ```
-
 <a [routerLink]="[/events]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Events</a>
-
-```
-
-```
-
 ```

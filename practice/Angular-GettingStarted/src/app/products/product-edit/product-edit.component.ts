@@ -6,6 +6,7 @@ import { IProduct } from '../product.model';
 import { Subscription } from 'rxjs';
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { NumberValidators } from 'src/app/shared/number-validator';
+import { MessageService } from '../../messages/messages.service';
 
 @Component({
   selector: 'pm-product-edit',
@@ -34,7 +35,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private messageService: MessageService
   ) {
     this.validationMessages = {
       productName: {
@@ -113,32 +115,32 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   deleteProduct(): void {
     if (this.product.id === 0) {
       // Don't delete, it was never saved.
-      this.onSaveComplete();
+      this.onSaveComplete(`${this.product.productName} was deleted`);
     } else {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
         this.productService.deleteProduct(this.product.id)
           .subscribe(
-            () => this.onSaveComplete(),
+            () => this.onSaveComplete(`${this.product.productName} was deleted`),
             err => this.errorMesssage = err
           );
       }
     }
   }
 
-  save(): void {
+  saveProduct(): void {
     if (this.productForm.valid) {
       if (this.productForm.dirty) {
         const p = { ...this.product, ...this.productForm.value };
         if (p.id === 0) {
           this.productService.createProduct(p)
             .subscribe(
-              () => this.onSaveComplete(),
+              () => this.onSaveComplete(`The new ${this.product.productName} was saved`),
               err => this.errorMesssage = err
             );
         } else {
           this.productService.updateProduct(p)
             .subscribe(
-              () => this.onSaveComplete(),
+              () => this.onSaveComplete(`The updated ${this.product.productName} was saved`),
               err => this.errorMesssage = err
             );
         }
@@ -150,7 +152,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSaveComplete() {
+  onSaveComplete(message?: string): void {
+    if (message) {
+      this.messageService.addMessage(message);
+    }
     // Reset the form to clear the flags
     this.productForm.reset();
     this.router.navigate(['/products']);
