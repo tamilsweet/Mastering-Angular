@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct as IProduct } from './product.model';
+import { Product as Product } from './product.model';
 import { ProductService } from './product.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -29,8 +29,8 @@ export class ProductListComponent implements OnInit {
     this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
   }
 
-  filteredProducts: IProduct[];
-  products: IProduct[] = [];
+  filteredProducts: Product[];
+  products: Product[] = [];
   errorMessage: string;
 
   constructor(
@@ -53,9 +53,9 @@ export class ProductListComponent implements OnInit {
     this.showImage = !this.showImage;
   }
 
-  performFilter(filterBy: string): IProduct[] {
+  performFilter(filterBy: string): Product[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.products.filter((product: IProduct) => {
+    return this.products.filter((product: Product) => {
       return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
     });
   }

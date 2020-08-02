@@ -1,13 +1,14 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { IProduct } from './product.model';
+import { Product } from './product.model';
 
 export class ProductData implements InMemoryDbService {
   createDb() {
-    const products: IProduct[] = [
+    const products: Product[] = [
       {
         'id': 1,
         'productName': 'Leaf Rake',
         'productCode': 'GDN-0011',
+        'category': 'rake',
         'releaseDate': 'March 19, 2019',
         'description': 'Leaf rake with 48-inch wooden handle.',
         'price': 19.95,
@@ -19,6 +20,7 @@ export class ProductData implements InMemoryDbService {
         'id': 2,
         'productName': 'Garden Cart',
         'productCode': 'GDN-0023',
+        'category': 'cart',
         'releaseDate': 'March 18, 2019',
         'description': '15 gallon capacity rolling garden cart',
         'price': 32.99,
@@ -30,6 +32,7 @@ export class ProductData implements InMemoryDbService {
         'id': 5,
         'productName': 'Hammer',
         'productCode': 'TBX-0048',
+        'category': 'tool',
         'releaseDate': 'May 21, 2019',
         'description': 'Curved claw steel hammer',
         'price': 8.9,
@@ -41,6 +44,7 @@ export class ProductData implements InMemoryDbService {
         'id': 8,
         'productName': 'Saw',
         'productCode': 'TBX-0022',
+        'category': 'tool',
         'releaseDate': 'May 15, 2019',
         'description': '15-inch steel blade hand saw',
         'price': 11.55,
@@ -52,6 +56,7 @@ export class ProductData implements InMemoryDbService {
         'id': 10,
         'productName': 'Video Game Controller',
         'productCode': 'GMG-0042',
+        'category': 'game',
         'releaseDate': 'October 15, 2018',
         'description': 'Standard two-button video game controller',
         'price': 35.95,

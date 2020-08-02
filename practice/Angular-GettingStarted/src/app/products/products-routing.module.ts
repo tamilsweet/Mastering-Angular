@@ -5,11 +5,22 @@ import { ProductDetailGuard } from './product-detail/product-detail.guard';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductEditGuard } from './product-edit/product-edit.guard';
 import { ProductListComponent } from './product-list.component';
+import { ProductResolver } from './product-resolver.service';
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
-  { path: 'products/:id', component: ProductDetailComponent, canActivate: [ProductDetailGuard] },
-  { path: 'products/:id/edit', component: ProductEditComponent, canDeactivate: [ProductEditGuard] },
+  {
+    path: 'products/:id',
+    component: ProductDetailComponent,
+    canActivate: [ProductDetailGuard],
+    resolve: { product: ProductResolver }
+  },
+  {
+    path: 'products/:id/edit',
+    component: ProductEditComponent,
+    canDeactivate: [ProductEditGuard],
+    resolve: { product: ProductResolver }
+  },
 ];
 
 

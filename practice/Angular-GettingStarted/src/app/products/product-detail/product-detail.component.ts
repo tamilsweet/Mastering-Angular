@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from '../product.model';
+import { Product } from '../product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 
@@ -10,7 +10,7 @@ import { ProductService } from '../product.service';
 export class ProductDetailComponent implements OnInit {
 
   pageTitle = 'Product Detail';
-  product: IProduct;
+  product: Product;
   autofocus = true;
   errorMessage: string;
 
@@ -21,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id: number = +this.route.snapshot.params['id'];
+    const id: number = +this.route.snapshot.params.id;
     this.productService.getProduct(id)
       .subscribe(
         product => this.product = product,

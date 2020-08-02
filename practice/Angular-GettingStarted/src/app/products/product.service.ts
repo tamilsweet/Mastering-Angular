@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IProduct, Product } from './product.model';
+import { Product } from './product.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { of, Observable, throwError } from 'rxjs';
 import { tap, catchError, filter, map } from 'rxjs/operators';
@@ -15,17 +15,17 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.productUrl).pipe(
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productUrl).pipe(
       // tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  createProduct(product: IProduct): Observable<IProduct> {
+  createProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     product.id = null;
-    return this.http.post<IProduct>(this.productUrl, product, { headers })
+    return this.http.post<Product>(this.productUrl, product, { headers })
       .pipe(
         tap(data => console.log('createProduct: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -42,10 +42,10 @@ export class ProductService {
       );
   }
 
-  updateProduct(product: IProduct): Observable<IProduct> {
+  updateProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const url = `${this.productUrl}/${product.id}`;
-    return this.http.put<IProduct>(url, product, { headers })
+    return this.http.put<Product>(url, product, { headers })
       .pipe(
         tap(data => console.log('updateProduct: ' + product.id)),
         map(() => product),
@@ -53,20 +53,31 @@ export class ProductService {
       );
   }
 
-  getProduct(id: number): Observable<IProduct> {
+  getProduct(id: number): Observable<Product> {
     if (id === 0) {
       return of(this.initializeProduct());
     }
     const url = `${this.productUrl}/${id}`;
-    return this.http.get<IProduct>(url)
+    return this.http.get<Product>(url)
       .pipe(
         tap(data => console.log('getProduct', JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
 
-  initializeProduct(): IProduct {
-    return new Product() as IProduct;
+  initializeProduct(): Product {
+    return {
+      'id': 0,
+      'productName': null,
+      'productCode': null,
+      'category': null,
+      'releaseDate': null,
+      'description': null,
+      'price': 0.0,
+      'starRating': null,
+      'imageUrl': null,
+      'tags': []
+    } as Product;
   }
 
   private handleError(err: HttpErrorResponse) {

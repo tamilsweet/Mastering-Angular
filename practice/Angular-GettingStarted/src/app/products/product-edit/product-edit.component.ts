@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular
 import { FormGroup, FormBuilder, Validators, FormControlName, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
-import { IProduct } from '../product.model';
+import { Product } from '../product.model';
 import { Subscription } from 'rxjs';
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { NumberValidators } from 'src/app/shared/number-validator';
@@ -19,7 +19,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   pageTitle = 'Product Edit';
   errorMesssage: string;
   productForm: FormGroup;
-  product: IProduct;
+  product: Product;
   private sub: Subscription;
 
   // use with the generic validation message class
@@ -86,7 +86,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       );
   }
 
-  displayProduct(product: IProduct): void {
+  displayProduct(product: Product): void {
     if (this.productForm) {
       this.productForm.reset();
     }
