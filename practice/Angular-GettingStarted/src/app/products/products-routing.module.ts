@@ -13,13 +13,13 @@ const routes: Routes = [
     path: 'products/:id',
     component: ProductDetailComponent,
     canActivate: [ProductDetailGuard],
-    resolve: { product: ProductResolver }
+    resolve: { resolvedProduct: ProductResolver }
   },
   {
     path: 'products/:id/edit',
     component: ProductEditComponent,
     canDeactivate: [ProductEditGuard],
-    resolve: { product: ProductResolver }
+    resolve: { resolvedProduct: ProductResolver }
   },
 ];
 

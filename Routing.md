@@ -165,6 +165,10 @@ this.router.navigate(['/products'], { queryParamsHandling: 'preserve' });
 { path: 'products', component: ProductListComponent, data: { pageTitle: 'Product List' }}
 
 this.pageTitle = this.route.snapshot.data['pageTitle'];
+
+this.route.data.subscribe(
+  data => this.pageTitle = data['pageTitle']
+)
 ```
 
 ## Navigate
