@@ -244,3 +244,11 @@ this.event = data['event'];
 ```
 <a [routerLink]="[/events]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Events</a>
 ```
+
+## Child Routes
+
+- Tabbed Pages
+- Master/details layouts
+- Embedded templates
+- Feature modules
+- Lazy Loading

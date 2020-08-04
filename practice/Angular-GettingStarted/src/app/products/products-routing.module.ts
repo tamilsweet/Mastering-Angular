@@ -6,6 +6,9 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductEditGuard } from './product-edit/product-edit.guard';
 import { ProductListComponent } from './product-list.component';
 import { ProductResolver } from './product-resolver.service';
+import { ProductEditInfoComponent } from './product-edit/info/product-edit-info.component';
+import { ProductEditTagsComponent } from './product-edit/info/product-edit-tags.component';
+
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
@@ -19,7 +22,12 @@ const routes: Routes = [
     path: 'products/:id/edit',
     component: ProductEditComponent,
     canDeactivate: [ProductEditGuard],
-    resolve: { resolvedProduct: ProductResolver }
+    resolve: { resolvedProduct: ProductResolver },
+    children: [
+      { path: '', redirectTo: 'info', pathMatch: 'full' },
+      { path: 'info', component: ProductEditInfoComponent },
+      { path: 'tags', component: ProductEditTagsComponent }
+    ]
   },
 ];
 
