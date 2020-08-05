@@ -252,3 +252,40 @@ this.event = data['event'];
 - Embedded templates
 - Feature modules
 - Lazy Loading
+
+### Activating Child Routes
+
+- Using templates
+
+```
+// Absolute Path
+<a [routerLink]="['/products', product.id, 'edit', 'info']">Info</a>
+
+// Relative Path
+<a [routerLink]="['info']">Info</a>
+```
+
+- Using component
+
+```
+// Absolute Path
+this.router.navigate(['/products', this.product.id, 'edit', 'info']);
+
+// Relative Path
+this.router.navigate(['info'], { relativeTo: this.route });
+```
+
+### Obtaining data for child route
+
+- Using service
+- Child Route Resolver
+
+```
+this.product = this.route.snapshot.data['product'];
+```
+
+- Parent Route Resolver
+
+```
+this.product = this.route.parent.snapshot.data['product'];
+```
