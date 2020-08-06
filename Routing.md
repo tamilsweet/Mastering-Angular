@@ -289,3 +289,22 @@ this.product = this.route.snapshot.data['product'];
 ```
 this.product = this.route.parent.snapshot.data['product'];
 ```
+
+## Component-less Routes
+
+- Add a default path that routes to the desired component
+- Remove the component from the parent route
+- The child routes are displayed in the higher-level outlet
+
+```
+RouterModule.forChild([
+  {
+    path: 'products'
+    children: [
+      { path: '', component: ProductListComponent },
+      { path: ':id', component: ProductDetailComponent, resolve: { product: ProductResolver }},
+      { path: ':id/edit', component: ProductEditComponent, resolve: { product: ProductResolver }}
+    ]
+  }
+])
+```
