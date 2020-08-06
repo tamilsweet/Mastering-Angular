@@ -26,6 +26,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
+  dataIsValid: boolean;
 
   get tags(): FormArray {
     return this.productForm.get('tags') as FormArray;
@@ -77,6 +78,19 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     return this.fb.group({
       tag: ['']
     });
+  }
+
+  isValid(path?: string): boolean {
+    this.validate();
+    if (path) {
+      return this.dataIsValid[path];
+    }
+    return (this.dataIsValid &&
+      Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
+  }
+
+  validate() {
+    throw new Error('Method not implemented.');
   }
 
   getProduct(id: number): void {

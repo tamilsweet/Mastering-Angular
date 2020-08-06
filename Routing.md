@@ -308,3 +308,9 @@ RouterModule.forChild([
   }
 ])
 ```
+
+## Styling Selected Route
+
+```
+<a [routerLink]="['info']" routerLinkActive="active">Basic Information</a>
+```
