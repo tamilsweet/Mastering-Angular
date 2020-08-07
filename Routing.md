@@ -328,3 +328,15 @@ RouterModule.forChild([
   animations: [ slideInAnimation ]
 })
 ```
+
+## Routing Events
+
+- NavigationStart
+- RoutesRecognized
+- NavigationEnd
+- NavigationCancel
+- NavigationError
+
+```
+RouterModule.forRoot([....], { enableTracing: true })
+```
