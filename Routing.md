@@ -314,3 +314,17 @@ RouterModule.forChild([
 ```
 <a [routerLink]="['info']" routerLinkActive="active">Basic Information</a>
 ```
+
+## Animating Route Transitions
+
+- Import BrowserAnimationModule
+- Define the desired animations
+- Register the animation with a component
+- Trigger the animation from the router outlet
+
+```
+@Component({
+  ...
+  animations: [ slideInAnimation ]
+})
+```
