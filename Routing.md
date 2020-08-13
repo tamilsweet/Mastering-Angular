@@ -340,3 +340,39 @@ RouterModule.forChild([
 ```
 RouterModule.forRoot([....], { enableTracing: true })
 ```
+
+## Secondary Routes
+
+- Add another RouterOutlet within a template
+- Can add multiple secondary router outlets
+- Use named route-outlet, each secondary router outlet must be uniquely named
+- Add the `outlet` property and set it to the name associated with RouterOutlet
+
+### Activating Secondary Routes
+
+```
+this.router.navigate([{ outlets: { popup: ['messages'] } }]);
+
+// Doesn't work in older version Angular
+this.router.navigate([ '/products', product.id, 'edit',
+                      { outlets: { popup: ['summary', product.id] } }]);
+
+this.router.navigate([{
+                      outlets: {
+                        primary: ['/products', product.id, 'edit'],
+                        popup: ['summary', product.id]
+                      }
+}]);
+
+
+this.router.navigateByUrl('/products/5/edit/(popup:summary/5)');
+```
+
+### Clearing Secondary Outlets
+
+```
+<a [routerLink]="[ { outlets: { popup: null }} ]">x</a>
+
+this.router.navigate([ { outlets: { popup: null }} ]);
+
+```
